@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model CurenncyExchange.Core.Currency
+
+
+@{
+    ViewData["Title"] = "";
+
+    
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Live Exchange Rates Today</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.USD) - @Html.DisplayFor(modelItem => modelItem.USD)
+                <p>
+                
+                     @Html.ActionLink("Buy", "Transaction", new {  type = 1 ,value = @ViewBag.USD})
+                </p>
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EURO) - @Html.DisplayFor(modelItem => modelItem.EURO)
+                <p>
+                  @Html.ActionLink("Buy", "Transaction", new {  type = 2,value =@ViewBag.EURO})
+                </p>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+</table>
