@@ -1,3 +1,5 @@
+using System;
+
 namespace CurenncyExchange.Notifications
 {
     public class WeatherForecast

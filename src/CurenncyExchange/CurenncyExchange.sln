@@ -9,15 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.MVC", "Cur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E92CA26A-FDF7-49DB-83F2-30273D332FAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Core", "CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{9594BF70-9B89-4289-924A-CD8A18EED5E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{9594BF70-9B89-4289-924A-CD8A18EED5E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{D9D4253A-8C40-4171-95AB-6A4DDEE028FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Transaction", "Microservices\CurenncyExchange.Transaction\CurenncyExchange.Transaction.csproj", "{A9C6375C-6695-4490-AED2-A4D65538054E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications", "Microservices\CurenncyExchange.Notifications\CurenncyExchange.Notifications.csproj", "{A3A2AE68-9884-43C9-813B-3FCCFB6D943F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notifications", "Microservices\CurenncyExchange.Notifications\CurenncyExchange.Notifications.csproj", "{A3A2AE68-9884-43C9-813B-3FCCFB6D943F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Tracing", "Microservices\CurenncyExchange.Tracing\CurenncyExchange.Tracing.csproj", "{3B768421-8E52-4504-B50E-84D38FA384F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Tracing", "Microservices\CurenncyExchange.Tracing\CurenncyExchange.Tracing.csproj", "{3B768421-8E52-4504-B50E-84D38FA384F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Transactions", "Microservices\CurenncyExchange.Transactions\CurenncyExchange.Transactions.csproj", "{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{9594BF70-9B89-4289-924A-CD8A18EED5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9594BF70-9B89-4289-924A-CD8A18EED5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9594BF70-9B89-4289-924A-CD8A18EED5E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9C6375C-6695-4490-AED2-A4D65538054E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9C6375C-6695-4490-AED2-A4D65538054E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9C6375C-6695-4490-AED2-A4D65538054E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9C6375C-6695-4490-AED2-A4D65538054E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3A2AE68-9884-43C9-813B-3FCCFB6D943F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3A2AE68-9884-43C9-813B-3FCCFB6D943F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A2AE68-9884-43C9-813B-3FCCFB6D943F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{3B768421-8E52-4504-B50E-84D38FA384F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B768421-8E52-4504-B50E-84D38FA384F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B768421-8E52-4504-B50E-84D38FA384F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,9 +52,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{11BF05A7-1BA8-4EB2-8002-FA50935719B5} = {C49F2B9B-3F68-4FBB-B289-7CA042525A4B}
 		{9594BF70-9B89-4289-924A-CD8A18EED5E2} = {E92CA26A-FDF7-49DB-83F2-30273D332FAE}
-		{A9C6375C-6695-4490-AED2-A4D65538054E} = {D9D4253A-8C40-4171-95AB-6A4DDEE028FF}
 		{A3A2AE68-9884-43C9-813B-3FCCFB6D943F} = {D9D4253A-8C40-4171-95AB-6A4DDEE028FF}
 		{3B768421-8E52-4504-B50E-84D38FA384F9} = {D9D4253A-8C40-4171-95AB-6A4DDEE028FF}
+		{EAD2F140-2437-413E-8F7E-AFD5D0AF3FB0} = {D9D4253A-8C40-4171-95AB-6A4DDEE028FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}

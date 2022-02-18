@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace CurenncyExchange.Transaction.Controllers
+namespace CurenncyExchange.Transactions.Controllers
 {
     [ApiController]
     [Route("[controller]")]

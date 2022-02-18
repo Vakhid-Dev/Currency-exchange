@@ -1,11 +1,18 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using System;
+using Microsoft.Extensions.Caching.Memory;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using CurenncyExchange.Core;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+
 namespace CurenncyExchange.MVC.Service
 {
     public class CurrencyService : BackgroundService, ICurrencyService

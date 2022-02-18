@@ -1,4 +1,4 @@
-namespace CurenncyExchange.Transaction
+namespace CurenncyExchange.Transactions
 {
     public class WeatherForecast
     {

@@ -1,10 +1,16 @@
-﻿using CurenncyExchange.Core;
+﻿using System;
+using CurenncyExchange.Core;
 using CurenncyExchange.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Extensions.Logging;
+
 namespace CurenncyExchange.MVC.Controllers
 {
     public class HomeController : Controller
@@ -75,11 +81,7 @@ namespace CurenncyExchange.MVC.Controllers
 
             return View();
         }
-        public IActionResult Buy()
-        {
-
-            return View();
-        }
+      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

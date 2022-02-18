@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using CurenncyExchange.Core;
 namespace CurenncyExchange.MVC.Service
 {

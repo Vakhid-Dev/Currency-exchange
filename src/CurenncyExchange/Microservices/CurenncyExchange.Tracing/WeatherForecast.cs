@@ -1,3 +1,5 @@
+using System;
+
 namespace CurenncyExchange.Tracing
 {
     public class WeatherForecast
