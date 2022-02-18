@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{E360B690-217A-40D9-B345-63B06D1D82A1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{5F4A640D-7595-4EBF-88A6-5007E6D54D19}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{5F4A640D-7595-4EBF-88A6-5007E6D54D19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{AF429945-FBC5-40A4-B90B-E7E156F24B40}"
 EndProject
@@ -45,7 +45,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Data", "Mi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{49AC722B-D598-4485-BC94-417302790064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.App", "Microservices\transaction\application\CurenncyExchange.App\CurenncyExchange.App.csproj", "{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.App", "Microservices\transaction\application\CurenncyExchange.App\CurenncyExchange.App.csproj", "{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notifications.Web.Api", "Microservices\notification\web.api\CurenncyExchange.Notifications.Web.Api\CurenncyExchange.Notifications.Web.Api.csproj", "{CDE19215-E673-4157-9BB0-82F3FFECFD6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notifications.App", "Microservices\notification\aplication\CurenncyExchange.Notifications.App\CurenncyExchange.Notifications.App.csproj", "{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{64EDA21A-92B1-480D-AB99-4A31BD2056EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Tracing.App", "Microservices\tracing\application\CurenncyExchange.Tracing.App\CurenncyExchange.Tracing.App.csproj", "{D03D0371-E22E-479C-908D-A2F017A454A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{7906A9AC-AE81-4500-9BFA-39DE89538A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +87,18 @@ Global
 		{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE19215-E673-4157-9BB0-82F3FFECFD6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE19215-E673-4157-9BB0-82F3FFECFD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE19215-E673-4157-9BB0-82F3FFECFD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE19215-E673-4157-9BB0-82F3FFECFD6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D03D0371-E22E-479C-908D-A2F017A454A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D03D0371-E22E-479C-908D-A2F017A454A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D03D0371-E22E-479C-908D-A2F017A454A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D03D0371-E22E-479C-908D-A2F017A454A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +123,11 @@ Global
 		{A8F3A7CD-8B77-43C9-A5A6-916CA63BFD96} = {D316D8FC-45B0-48B1-9C37-FF6C441C1FE3}
 		{49AC722B-D598-4485-BC94-417302790064} = {BA9FFA8F-60E5-45AC-AE98-6A189DCF7F93}
 		{3B5C0C96-36C3-4909-9EFB-64E05A56C58D} = {49AC722B-D598-4485-BC94-417302790064}
+		{CDE19215-E673-4157-9BB0-82F3FFECFD6B} = {6A8BC5BA-B505-4E15-9749-4C7361A9FD18}
+		{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2} = {5F4A640D-7595-4EBF-88A6-5007E6D54D19}
+		{64EDA21A-92B1-480D-AB99-4A31BD2056EB} = {EAF2BF7E-994A-450B-A582-F805C2487102}
+		{D03D0371-E22E-479C-908D-A2F017A454A1} = {64EDA21A-92B1-480D-AB99-4A31BD2056EB}
+		{7906A9AC-AE81-4500-9BFA-39DE89538A9B} = {1698D77A-1A2C-4D5C-A233-DE07FC3EAC6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}

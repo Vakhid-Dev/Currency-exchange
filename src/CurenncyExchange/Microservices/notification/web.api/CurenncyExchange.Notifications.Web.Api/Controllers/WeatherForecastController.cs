@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace CurenncyExchange.Notifications.Controllers
+namespace CurenncyExchange.Notifications.Web.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

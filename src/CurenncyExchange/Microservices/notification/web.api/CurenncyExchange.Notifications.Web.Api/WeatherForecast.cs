@@ -1,6 +1,4 @@
-using System;
-
-namespace CurenncyExchange.Notifications
+namespace CurenncyExchange.Notifications.Web.Api
 {
     public class WeatherForecast
     {
