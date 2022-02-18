@@ -1,6 +1,5 @@
 ﻿using CurenncyExchange.App.Service;
 using CurenncyExchange.Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CurenncyExchange.Transactions.Web.Api.Controllers

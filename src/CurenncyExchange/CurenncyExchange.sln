@@ -47,15 +47,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.App", "Microservices\transaction\application\CurenncyExchange.App\CurenncyExchange.App.csproj", "{3B5C0C96-36C3-4909-9EFB-64E05A56C58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notifications.Web.Api", "Microservices\notification\web.api\CurenncyExchange.Notifications.Web.Api\CurenncyExchange.Notifications.Web.Api.csproj", "{CDE19215-E673-4157-9BB0-82F3FFECFD6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications.Web.Api", "Microservices\notification\web.api\CurenncyExchange.Notifications.Web.Api\CurenncyExchange.Notifications.Web.Api.csproj", "{CDE19215-E673-4157-9BB0-82F3FFECFD6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notifications.App", "Microservices\notification\aplication\CurenncyExchange.Notifications.App\CurenncyExchange.Notifications.App.csproj", "{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications.App", "Microservices\notification\aplication\CurenncyExchange.Notifications.App\CurenncyExchange.Notifications.App.csproj", "{C7B7AB15-24B8-4D3D-BA3A-17DE4C1A44A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{64EDA21A-92B1-480D-AB99-4A31BD2056EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Tracing.App", "Microservices\tracing\application\CurenncyExchange.Tracing.App\CurenncyExchange.Tracing.App.csproj", "{D03D0371-E22E-479C-908D-A2F017A454A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Tracing.App", "Microservices\tracing\application\CurenncyExchange.Tracing.App\CurenncyExchange.Tracing.App.csproj", "{D03D0371-E22E-479C-908D-A2F017A454A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{7906A9AC-AE81-4500-9BFA-39DE89538A9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "micrsoervices", "micrsoervices", "{CDEF3294-6523-4110-B713-1D0591ED4C37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +130,7 @@ Global
 		{64EDA21A-92B1-480D-AB99-4A31BD2056EB} = {EAF2BF7E-994A-450B-A582-F805C2487102}
 		{D03D0371-E22E-479C-908D-A2F017A454A1} = {64EDA21A-92B1-480D-AB99-4A31BD2056EB}
 		{7906A9AC-AE81-4500-9BFA-39DE89538A9B} = {1698D77A-1A2C-4D5C-A233-DE07FC3EAC6A}
+		{CDEF3294-6523-4110-B713-1D0591ED4C37} = {1698D77A-1A2C-4D5C-A233-DE07FC3EAC6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}
