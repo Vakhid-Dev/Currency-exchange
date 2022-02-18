@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CurenncyExchange.Core\CurenncyExchange.Core.csproj" />
+    <Folder Include="Reposiotry\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj" />
   </ItemGroup>
 
 </Project>

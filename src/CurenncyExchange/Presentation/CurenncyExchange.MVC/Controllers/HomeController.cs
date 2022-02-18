@@ -1,15 +1,9 @@
-﻿using System;
-using CurenncyExchange.Core;
+﻿using CurenncyExchange.Core;
 using CurenncyExchange.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.Extensions.Logging;
 
 namespace CurenncyExchange.MVC.Controllers
 {
@@ -30,7 +24,7 @@ namespace CurenncyExchange.MVC.Controllers
             if (!_memoryCache.TryGetValue("key_currency", out Currency currency))
             {
                 // ToDo log here
-                throw new Exception("Cannot red from_memoryCache ");
+                throw new Exception("Cannot read from_memoryCache ");
             }
             ViewBag.USD = currency.USD;
             ViewBag.EURO = currency.EURO;
@@ -45,7 +39,7 @@ namespace CurenncyExchange.MVC.Controllers
                 var ser = JsonSerializer.Serialize(accountDetails); 
                 HttpRequestMessage message = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri("https://localhost:7188/api/transaction"),
+                    RequestUri = new Uri("https://localhost:7287/api/transaction"),
                     Method = HttpMethod.Post,
                     Content = JsonContent.Create(accountDetails)
 

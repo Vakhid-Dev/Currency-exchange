@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{F2ECC0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{ACF5FD99-7C1F-4780-86C0-B709E1F8C09F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "Domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{0738B9E5-7D6A-481E-9951-FC250227C9D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{0738B9E5-7D6A-481E-9951-FC250227C9D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Transactions.Web.Api", "Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api.csproj", "{6FCDB885-2E40-437F-BAF3-B404DA4717AB}"
 EndProject
