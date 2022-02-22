@@ -8,14 +8,15 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
     [ApiController]
     public class TransactionController : ControllerBase
     {
-        private ITransactionService _transactionService;
+        private readonly ITransactionService _transactionService;
         public TransactionController(ITransactionService transactionService)
         {
             _transactionService = transactionService;
         }
         //ToDo need to implement
        // [HttpPost(Name = "execute")]
-        public Task Get(AccountDetails accountDetails)
+       [HttpPost]
+        public Task Init(AccountDetails accountDetails)
         {
             _transactionService.ExecuteAsync(accountDetails);
             return Task.CompletedTask;

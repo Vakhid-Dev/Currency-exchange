@@ -1,5 +1,6 @@
 ﻿using CurenncyExchange.Core;
 using CurenncyExchange.Data.Context;
+using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
 using RabbitMQ.Client;
 using System.Text;
@@ -17,10 +18,10 @@ namespace CurenncyExchange.App.Repository
         public async Task ExecuteAsync(AccountDetails accountDetails)
         {
             
-            await PablishEvent();
+            await PablishEvent(accountDetails);
            
         }
-        public Task PablishEvent() 
+        public async Task<Task>PablishEvent(AccountDetails accountDetails) 
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
@@ -39,6 +40,15 @@ namespace CurenncyExchange.App.Repository
                                      routingKey: "hello",
                                      basicProperties: null,
                                      body: body);
+                if (accountDetails!=null)
+                {
+                   var transaction = new TransactionBase()
+                    {
+                        AccountDetails = accountDetails
+                    };
+                   await _transactionContext.TransactionDetails.AddAsync(transaction);
+                   await _transactionContext.SaveChangesAsync();
+                }
 
             }  
 

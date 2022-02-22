@@ -1,6 +1,7 @@
-﻿using CurenncyExchange.Core;
+﻿
+using CurenncyExchange.Transaction.Core;
 using Microsoft.EntityFrameworkCore;
-
+using System.Transactions;
 namespace CurenncyExchange.Data.Context
 {
     public class TransactionContext :DbContext
@@ -10,7 +11,7 @@ namespace CurenncyExchange.Data.Context
         {
 
         }
-        public DbSet <AccountDetails> AccountDetails { get; set; }
-        public DbSet<Currency> Currencies { get; set; }
+        public DbSet <TransactionBase> TransactionDetails { get; set; }
+      
     }
 }
