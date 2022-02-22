@@ -14,9 +14,11 @@ namespace CurenncyExchange.App.Repository
             _transactionContext = transactionContext;
         }
         //ToDo need to imlement 
-        public Task ExecuteAsync(AccountDetails accountDetails)
+        public async Task ExecuteAsync(AccountDetails accountDetails)
         {
-            return Task.CompletedTask;
+            
+            await PablishEvent();
+           
         }
         public Task PablishEvent() 
         {
@@ -24,29 +26,20 @@ namespace CurenncyExchange.App.Repository
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare("transaction",
-                                         ExchangeType.Fanout);
-
-                channel.QueueDeclare(queue: "notification",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
-
-                channel.QueueDeclare(queue: "tracing",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+                channel.QueueDeclare(queue: "hello",
+                                 durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
 
                 string message = "Transaction";
                 var body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish(exchange: "transaction",
-                                     routingKey: "",
+                channel.BasicPublish(exchange: "",
+                                     routingKey: "hello",
                                      basicProperties: null,
                                      body: body);
-               
+
             }  
 
             return Task.CompletedTask;

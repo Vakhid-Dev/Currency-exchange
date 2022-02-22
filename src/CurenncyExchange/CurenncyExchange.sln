@@ -59,6 +59,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "micrsoervices", "micrsoervices", "{CDEF3294-6523-4110-B713-1D0591ED4C37}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications.Email", "MIcroservices\notification\microservices\CurenncyExchange.Notifications.Email\CurenncyExchange.Notifications.Email.csproj", "{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "microservices", "microservices", "{A2EC5F78-E305-4795-9223-634D2722BA8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Tracing.Succes", "Microservices\tracing\microservices\CurenncyExchange.Tracing.Succes\CurenncyExchange.Tracing.Succes.csproj", "{41FE6899-7408-424E-9D6B-4DED06FC0E40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications.Sms", "Microservices\notification\microservices\CurenncyExchange.Notifications.Sms\CurenncyExchange.Notifications.Sms.csproj", "{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Tracings.Web.Api", "Microservices\tracing\web.api\CurenncyExchange.Tracings.Web.Api\CurenncyExchange.Tracings.Web.Api.csproj", "{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +111,22 @@ Global
 		{D03D0371-E22E-479C-908D-A2F017A454A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D03D0371-E22E-479C-908D-A2F017A454A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D03D0371-E22E-479C-908D-A2F017A454A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FE6899-7408-424E-9D6B-4DED06FC0E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FE6899-7408-424E-9D6B-4DED06FC0E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FE6899-7408-424E-9D6B-4DED06FC0E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FE6899-7408-424E-9D6B-4DED06FC0E40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +157,11 @@ Global
 		{D03D0371-E22E-479C-908D-A2F017A454A1} = {64EDA21A-92B1-480D-AB99-4A31BD2056EB}
 		{7906A9AC-AE81-4500-9BFA-39DE89538A9B} = {1698D77A-1A2C-4D5C-A233-DE07FC3EAC6A}
 		{CDEF3294-6523-4110-B713-1D0591ED4C37} = {1698D77A-1A2C-4D5C-A233-DE07FC3EAC6A}
+		{78CDC0CC-C8B9-4AB4-8D59-9B737FBA157F} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
+		{A2EC5F78-E305-4795-9223-634D2722BA8A} = {EAF2BF7E-994A-450B-A582-F805C2487102}
+		{41FE6899-7408-424E-9D6B-4DED06FC0E40} = {A2EC5F78-E305-4795-9223-634D2722BA8A}
+		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
+		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3} = {DD61EA93-8BFC-48D9-8E6A-B572F4CA9CD5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}

@@ -47,10 +47,12 @@ namespace CurenncyExchange.MVC.Controllers
                 HttpResponseMessage? res = await client.SendAsync(message);
                 if (res.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-
+                    return RedirectToAction("Index");
+                    
                 }
             }
-            return View();
+            return Ok("Succes");
+
         }
         [HttpGet]
         public IActionResult Transaction([FromQuery(Name = "type")] int type, [FromQuery(Name = "value")] decimal value)
