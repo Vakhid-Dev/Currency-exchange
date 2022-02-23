@@ -4,6 +4,6 @@ namespace CurenncyExchange.Transaction.Core.Repository
 {
     public interface ITransactionRepository
     {
-      public  Task ExecuteAsync(AccountDetails accountDetails);
+      public  Task ExecuteAsync(TransactionCurrency transactionCurrency );
     }
 }

@@ -10,18 +10,18 @@ namespace CurenncyExchange.App.Repository
     public class TransactionRepository : ITransactionRepository
     {
         private TransactionContext _transactionContext;
-        public TransactionRepository(TransactionContext transactionContext)
+        public TransactionRepository()
         {
-            _transactionContext = transactionContext;
+        //    _transactionContext = transactionContext;
         }
         //ToDo need to imlement 
-        public async Task ExecuteAsync(AccountDetails accountDetails)
+        public async Task ExecuteAsync(TransactionCurrency transactionCurrency)
         {
             
-            await PablishEvent(accountDetails);
+            await PablishEvent(transactionCurrency);
            
         }
-        public async Task<Task>PablishEvent(AccountDetails accountDetails) 
+        public async Task<Task>PablishEvent(TransactionCurrency transactionCurrency) 
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
@@ -40,14 +40,16 @@ namespace CurenncyExchange.App.Repository
                                      routingKey: "hello",
                                      basicProperties: null,
                                      body: body);
-                if (accountDetails!=null)
+                if (transactionCurrency != null)
                 {
-                   var transaction = new TransactionBase()
+
+                    using (var context = new TransactionContext())
                     {
-                        AccountDetails = accountDetails
-                    };
-                   await _transactionContext.TransactionDetails.AddAsync(transaction);
-                   await _transactionContext.SaveChangesAsync();
+                        await context.TransactionDetails.AddAsync(transactionCurrency);
+                        await context.SaveChangesAsync();
+
+                    }
+                   
                 }
 
             }  

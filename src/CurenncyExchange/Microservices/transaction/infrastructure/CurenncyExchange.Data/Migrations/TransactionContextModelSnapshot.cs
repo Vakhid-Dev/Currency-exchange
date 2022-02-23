@@ -31,12 +31,18 @@ namespace CurenncyExchange.Data.Migrations
                     b.Property<decimal?>("Ammount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("CurrencyType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("AccountDetails");
                 });
 
-            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionBase", b =>
+            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +58,7 @@ namespace CurenncyExchange.Data.Migrations
                     b.ToTable("TransactionDetails");
                 });
 
-            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionBase", b =>
+            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
                 {
                     b.HasOne("CurenncyExchange.Core.AccountDetails", "AccountDetails")
                         .WithMany()

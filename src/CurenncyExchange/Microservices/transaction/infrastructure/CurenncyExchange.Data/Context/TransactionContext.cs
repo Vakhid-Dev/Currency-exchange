@@ -6,12 +6,17 @@ namespace CurenncyExchange.Data.Context
 {
     public class TransactionContext :DbContext
     {
-        public TransactionContext(DbContextOptions<TransactionContext?> options)
-             : base(options)    
+        public TransactionContext()    
         {
-
+        
         }
-        public DbSet <TransactionBase> TransactionDetails { get; set; }
-      
+        public DbSet <TransactionCurrency> TransactionDetails { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ExchangeTransactions;Trusted_Connection=True;");
+            }
+        }
     }
 }

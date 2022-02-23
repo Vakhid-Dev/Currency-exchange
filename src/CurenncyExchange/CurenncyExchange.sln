@@ -37,8 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{ACF5FD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "Domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{0738B9E5-7D6A-481E-9951-FC250227C9D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Transactions.Web.Api", "Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api.csproj", "{6FCDB885-2E40-437F-BAF3-B404DA4717AB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.TransactionCore", "Microservices\transaction\domain\CurenncyExchange.Core\CurenncyExchange.TransactionCore.csproj", "{7F9FC55B-14E6-4053-B632-C76C099C1D6A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Data", "Microservices\transaction\infrastructure\CurenncyExchange.Data\CurenncyExchange.Data.csproj", "{A8F3A7CD-8B77-43C9-A5A6-916CA63BFD96}"
@@ -67,7 +65,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Tracing.Su
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notifications.Sms", "Microservices\notification\microservices\CurenncyExchange.Notifications.Sms\CurenncyExchange.Notifications.Sms.csproj", "{326CF9CF-7AAF-4D7E-8DB7-B0940462F337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Tracings.Web.Api", "Microservices\tracing\web.api\CurenncyExchange.Tracings.Web.Api\CurenncyExchange.Tracings.Web.Api.csproj", "{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Tracings.Web.Api", "Microservices\tracing\web.api\CurenncyExchange.Tracings.Web.Api\CurenncyExchange.Tracings.Web.Api.csproj", "{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Transactions.Web.Api", "Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api.csproj", "{9C467005-99C2-487C-887E-671A3ABE4ACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +83,6 @@ Global
 		{0738B9E5-7D6A-481E-9951-FC250227C9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0738B9E5-7D6A-481E-9951-FC250227C9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0738B9E5-7D6A-481E-9951-FC250227C9D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FCDB885-2E40-437F-BAF3-B404DA4717AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FCDB885-2E40-437F-BAF3-B404DA4717AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FCDB885-2E40-437F-BAF3-B404DA4717AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FCDB885-2E40-437F-BAF3-B404DA4717AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F9FC55B-14E6-4053-B632-C76C099C1D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F9FC55B-14E6-4053-B632-C76C099C1D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F9FC55B-14E6-4053-B632-C76C099C1D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -127,6 +123,10 @@ Global
 		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C467005-99C2-487C-887E-671A3ABE4ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C467005-99C2-487C-887E-671A3ABE4ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C467005-99C2-487C-887E-671A3ABE4ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C467005-99C2-487C-887E-671A3ABE4ACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,7 +146,6 @@ Global
 		{F2ECC04D-D601-4D24-9CB9-AA0C9558F06B} = {EAF2BF7E-994A-450B-A582-F805C2487102}
 		{ACF5FD99-7C1F-4780-86C0-B709E1F8C09F} = {BA9FFA8F-60E5-45AC-AE98-6A189DCF7F93}
 		{0738B9E5-7D6A-481E-9951-FC250227C9D9} = {E92CA26A-FDF7-49DB-83F2-30273D332FAE}
-		{6FCDB885-2E40-437F-BAF3-B404DA4717AB} = {2CA3F045-5734-4413-999D-A7C293C1FF8C}
 		{7F9FC55B-14E6-4053-B632-C76C099C1D6A} = {ACF5FD99-7C1F-4780-86C0-B709E1F8C09F}
 		{A8F3A7CD-8B77-43C9-A5A6-916CA63BFD96} = {D316D8FC-45B0-48B1-9C37-FF6C441C1FE3}
 		{49AC722B-D598-4485-BC94-417302790064} = {BA9FFA8F-60E5-45AC-AE98-6A189DCF7F93}
@@ -162,6 +161,7 @@ Global
 		{41FE6899-7408-424E-9D6B-4DED06FC0E40} = {A2EC5F78-E305-4795-9223-634D2722BA8A}
 		{326CF9CF-7AAF-4D7E-8DB7-B0940462F337} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
 		{9BF3C875-4576-4C0E-BB1C-D6B845900BC3} = {DD61EA93-8BFC-48D9-8E6A-B572F4CA9CD5}
+		{9C467005-99C2-487C-887E-671A3ABE4ACC} = {2CA3F045-5734-4413-999D-A7C293C1FF8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}

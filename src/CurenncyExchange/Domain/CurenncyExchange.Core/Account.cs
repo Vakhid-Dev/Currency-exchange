@@ -2,7 +2,7 @@
 {
     public class Account
     {
-        public  Guid Id { get; set; }
+        public  Guid Id { get;  set; }
 
     }
 }

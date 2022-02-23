@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CurenncyExchange.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class initialise : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,9 @@ namespace CurenncyExchange.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Ammount = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    Ammount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CurrencyType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {

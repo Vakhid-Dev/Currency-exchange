@@ -1,5 +1,6 @@
 ﻿using CurenncyExchange.Core;
 using CurenncyExchange.MVC.Models;
+using CurenncyExchange.Transaction.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
@@ -31,20 +32,29 @@ namespace CurenncyExchange.MVC.Controllers
             return View(currency);
         }
         [HttpPost]
-        public async Task<IActionResult> Transaction(AccountDetails accountDetails)
+        public async Task<IActionResult> Transaction(TransactionCurrency transactionCurrency)
         {
             using (var client = new HttpClient ())
             {
-                accountDetails.Ammount = 1000;
-                var ser = JsonSerializer.Serialize(accountDetails); 
+                transactionCurrency.AccountDetails = new AccountDetails()
+                {
+                    Ammount = 100,
+                    CurrencyType = "USD",
+                    Rate = 80
+                    
+                };
+                transactionCurrency.Id = new Guid();
+                var ser = JsonSerializer.Serialize(transactionCurrency); 
                 HttpRequestMessage message = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri("https://localhost:7287/api/transaction"),
+                    RequestUri = new Uri("https://localhost:7011/api/transactioncurrencies"),
                     Method = HttpMethod.Post,
-                    Content = JsonContent.Create(accountDetails)
+                    Content = JsonContent.Create(transactionCurrency)
 
             };
-                HttpResponseMessage? res = await client.SendAsync(message);
+               
+                HttpResponseMessage? res = await client.PostAsync(message.RequestUri,
+                    message.Content);
                 if (res.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return RedirectToAction("Index");

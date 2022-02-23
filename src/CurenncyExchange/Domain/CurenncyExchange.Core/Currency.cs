@@ -4,5 +4,6 @@
     {
         public  decimal USD { get; set; } 
         public  decimal EURO { get; set; }   
+    
     }
 }

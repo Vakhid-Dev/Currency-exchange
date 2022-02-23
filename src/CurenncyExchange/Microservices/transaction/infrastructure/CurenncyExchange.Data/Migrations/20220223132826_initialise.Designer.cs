@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CurenncyExchange.Data.Migrations
 {
     [DbContext(typeof(TransactionContext))]
-    [Migration("20220222141734_Init")]
-    partial class Init
+    [Migration("20220223132826_initialise")]
+    partial class initialise
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,12 +33,18 @@ namespace CurenncyExchange.Data.Migrations
                     b.Property<decimal?>("Ammount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("CurrencyType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("AccountDetails");
                 });
 
-            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionBase", b =>
+            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +60,7 @@ namespace CurenncyExchange.Data.Migrations
                     b.ToTable("TransactionDetails");
                 });
 
-            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionBase", b =>
+            modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
                 {
                     b.HasOne("CurenncyExchange.Core.AccountDetails", "AccountDetails")
                         .WithMany()

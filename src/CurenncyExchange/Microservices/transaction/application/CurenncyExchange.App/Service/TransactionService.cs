@@ -1,4 +1,5 @@
 ﻿using CurenncyExchange.Core;
+using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
 
 namespace CurenncyExchange.App.Service
@@ -11,9 +12,9 @@ namespace CurenncyExchange.App.Service
             _transactionRepository = transactionRepository;
         }
         //ToDo need to imlement 
-        public Task ExecuteAsync (AccountDetails accountDetails)
+        public Task ExecuteAsync (TransactionCurrency transactionCurrency)
         {
-            _transactionRepository.ExecuteAsync(accountDetails);
+            _transactionRepository.ExecuteAsync(transactionCurrency);
             return Task.CompletedTask;  
         }
     }
