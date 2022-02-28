@@ -14,7 +14,7 @@ namespace CurenncyExchange.App.Service
         //ToDo need to imlement 
         public Task ExecuteAsync (TransactionCurrency transactionCurrency)
         {
-            _transactionRepository.ExecuteAsync(transactionCurrency);
+            _transactionRepository.SendMessage(transactionCurrency);
             return Task.CompletedTask;  
         }
     }

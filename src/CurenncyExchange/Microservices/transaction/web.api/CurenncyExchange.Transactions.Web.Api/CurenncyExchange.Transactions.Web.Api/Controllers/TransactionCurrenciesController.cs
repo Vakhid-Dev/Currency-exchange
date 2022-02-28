@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.App.Service;
+using CurenncyExchange.Transaction.Core.Repository;
 
 namespace CurenncyExchange.Transactions.Web.Api.Controllers
 {
@@ -9,11 +10,11 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
     [ApiController]
     public class TransactionCurrenciesController : ControllerBase
     {
-        private readonly ITransactionService _transactionService;
+        private ITransactionRepository _transactionRepository;
 
-        public TransactionCurrenciesController(ITransactionService transactionService)
+        public TransactionCurrenciesController(ITransactionRepository transactionRepository)
         {
-            _transactionService = transactionService;
+            _transactionRepository = transactionRepository;
         }
 
         // GET: api/TransactionCurrencies
@@ -32,11 +33,11 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
 
         
         [HttpPost]
-        public async Task<ActionResult<TransactionCurrency>> PostTransactionCurrency(TransactionCurrency transactionCurrency)
+        public IActionResult PostTransactionCurrency(TransactionCurrency transactionCurrency)
         {
-          await _transactionService.ExecuteAsync(transactionCurrency);
+           _transactionRepository.SendMessage(transactionCurrency);
 
-            return CreatedAtAction("GetTransactionCurrency", new { id = transactionCurrency.Id }, transactionCurrency);
+            return Ok($"SENDET {transactionCurrency}");
         }
 
 

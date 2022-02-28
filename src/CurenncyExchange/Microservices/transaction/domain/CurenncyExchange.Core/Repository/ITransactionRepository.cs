@@ -1,9 +1,10 @@
 ﻿using CurenncyExchange.Core;
+using CurenncyExchange.Core.RabbitMQ;
 
 namespace CurenncyExchange.Transaction.Core.Repository
 {
-    public interface ITransactionRepository
+    public interface ITransactionRepository : IRabbitMQ
     {
-      public  Task ExecuteAsync(TransactionCurrency transactionCurrency );
+      
     }
 }

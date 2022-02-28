@@ -58,11 +58,7 @@ namespace CurenncyExchange.MVC.Service
                         Currency? currency =  await TryParseCurrencyDocument(feedXML);
                         if (currency != null)
                         {
-                            Task.Run(async () =>
-                            {
-                                await Task.Delay(300);
-                                return new JsonResult(currency);
-                            });
+                           
                         }
                     }
                 }
@@ -75,6 +71,7 @@ namespace CurenncyExchange.MVC.Service
                 throw new ArgumentException(nameof (ex));
             }
         }
+
         public async Task<Currency?> TryParseCurrencyDocument(XDocument? xDocument)
         {
            

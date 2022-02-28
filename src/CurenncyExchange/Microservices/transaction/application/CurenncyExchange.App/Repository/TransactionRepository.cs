@@ -1,9 +1,12 @@
 ﻿using CurenncyExchange.Core;
+using CurenncyExchange.Core.RabbitMQ;
 using CurenncyExchange.Data.Context;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
 using RabbitMQ.Client;
 using System.Text;
+using System.Text;
+using System.Text.Json;
 
 namespace CurenncyExchange.App.Repository
 {
@@ -12,49 +15,35 @@ namespace CurenncyExchange.App.Repository
         private TransactionContext _transactionContext;
         public TransactionRepository()
         {
-        //    _transactionContext = transactionContext;
+            //    _transactionContext = transactionContext;
         }
-        //ToDo need to imlement 
-        public async Task ExecuteAsync(TransactionCurrency transactionCurrency)
+
+
+        public void SendMessage(object obj)
         {
-            
-            await PablishEvent(transactionCurrency);
-           
+            var message = JsonSerializer.Serialize(obj);
+            SendMessage(message);
         }
-        public async Task<Task>PablishEvent(TransactionCurrency transactionCurrency) 
+
+        public void SendMessage(string message)
         {
+            //  вынести значения "localhost" и "Queue"
+            // в файл конфигурации
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "hello",
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
-
-                string message = "Transaction";
-                var body = Encoding.UTF8.GetBytes(message);
-
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "hello",
+                channel.ExchangeDeclare("transaction", ExchangeType.Fanout);
+                    var body = Encoding.UTF8.GetBytes(message);
+                    channel.BasicPublish(exchange: "transaction",
+                                     routingKey: "",
                                      basicProperties: null,
                                      body: body);
-                if (transactionCurrency != null)
-                {
-
-                    using (var context = new TransactionContext())
-                    {
-                        await context.TransactionDetails.AddAsync(transactionCurrency);
-                        await context.SaveChangesAsync();
-
-                    }
-                   
-                }
-
-            }  
-
-            return Task.CompletedTask;
+               
+            }
         }
+
     }
+
 }
+
