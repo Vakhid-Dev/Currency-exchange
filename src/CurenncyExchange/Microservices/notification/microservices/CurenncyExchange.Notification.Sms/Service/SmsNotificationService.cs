@@ -1,11 +1,12 @@
-﻿using CurenncyExchange.Notification.Core;
+﻿using CurenncyExchange.Core.RabbitMQ;
+using CurenncyExchange.Notification.Core;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace CurenncyExchange.Notification.Email.Service
 {
-    public class SmsNotificationService : INotificationService
+    public class SmsNotificationService : INotificationService, IRabbitMqReceiver
     {
         public async Task Recieve()
         {

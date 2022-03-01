@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj" />
     <ProjectReference Include="..\..\domain\CurenncyExchange.Core\CurenncyExchange.Notification.Core.csproj" />
   </ItemGroup>
 

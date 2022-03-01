@@ -1,4 +1,5 @@
-﻿using CurenncyExchange.Notification.Core;
+﻿using CurenncyExchange.Core.RabbitMQ;
+using CurenncyExchange.Notification.Core;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -9,8 +10,14 @@ using System.Threading.Tasks;
 
 namespace CurenncyExchange.Notification.Email.Service
 {
-    internal class EmailNotificationService : INotificationService
+    internal class EmailNotificationService : INotificationService, IRabbitMqReceiver
     {
+
+        public void Notify(Guid subjectId, Message message)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Recieve()
         {
             var connectionFactory = new ConnectionFactory() { HostName = "localhost" };
@@ -32,10 +39,7 @@ namespace CurenncyExchange.Notification.Email.Service
                 chanel.BasicConsume("email", true, consumer);
                 Console.ReadLine();
             }
-        }
-        public void Notify(Guid subjectId, Message message)
-        {
-            throw new NotImplementedException();
+            await Task.Delay(1000);
         }
     }
 }

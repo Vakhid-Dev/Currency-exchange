@@ -12,7 +12,7 @@
     using CurenncyExchange.Notification.Core;
     using CurenncyExchange.Transaction.Core;
 
-    public class RabbitMqListener : BackgroundService, IRabbitMQ
+    public class RabbitMqListener : BackgroundService, IRabbitMqSender, IRabbitMqReceiver
     {
         private IConnection _connection;
         private IModel _channel;
@@ -29,10 +29,29 @@
             _channel.QueueBind(queue: "notification", "transaction", "");
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            stoppingToken.ThrowIfCancellationRequested();
+            try
+            {
+                stoppingToken.ThrowIfCancellationRequested();
+                await Recive();
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        public override void Dispose()
+        {
+            _channel.Close();
+            _connection.Close();
+            base.Dispose();
+        }
+
+        public async Task Recive()
+        {
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += async (ch, ea) =>
             {
@@ -46,18 +65,8 @@
             };
 
             _channel.BasicConsume("notification", false, consumer);
-
-            return Task.CompletedTask;
+            await Task.Delay(1000);
         }
-
-        public override void Dispose()
-        {
-            _channel.Close();
-            _connection.Close();
-            base.Dispose();
-        }
-
-
         public async Task SendMessage(object obj)
         {
             TransactionCurrency? transactionCurrency = obj as TransactionCurrency;
@@ -95,6 +104,9 @@
             }
             await Task.Delay(1000);
         }
+
+
+
 
     }
 }
