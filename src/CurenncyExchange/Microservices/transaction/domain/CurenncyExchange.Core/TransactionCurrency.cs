@@ -9,6 +9,8 @@ namespace CurenncyExchange.Transaction.Core
             Id = new Guid();
         }
         public Guid Id { get; set; }
-        public AccountDetails? AccountDetails { get; set; } 
+        public DateTime DateCreation { get; set; }
+        public Account? Accounts { get; set; }
+        public CurrencyDetails? CurrencyDetails { get; set; }
     }
 }

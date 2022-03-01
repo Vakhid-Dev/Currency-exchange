@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.TransactionCore", "Microservices\transaction\domain\CurenncyExchange.Core\CurenncyExchange.TransactionCore.csproj", "{7F9FC55B-14E6-4053-B632-C76C099C1D6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Data", "Microservices\transaction\infrastructure\CurenncyExchange.Data\CurenncyExchange.Data.csproj", "{A8F3A7CD-8B77-43C9-A5A6-916CA63BFD96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Transaction.Data", "Microservices\transaction\infrastructure\CurenncyExchange.Data\CurenncyExchange.Transaction.Data.csproj", "{A8F3A7CD-8B77-43C9-A5A6-916CA63BFD96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{49AC722B-D598-4485-BC94-417302790064}"
 EndProject

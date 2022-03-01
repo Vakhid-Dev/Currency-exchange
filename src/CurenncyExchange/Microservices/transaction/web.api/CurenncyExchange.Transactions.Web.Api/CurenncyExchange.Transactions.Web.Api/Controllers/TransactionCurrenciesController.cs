@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.App.Service;
-using CurenncyExchange.Transaction.Core.Repository;
 
 namespace CurenncyExchange.Transactions.Web.Api.Controllers
 {
@@ -10,11 +9,11 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
     [ApiController]
     public class TransactionCurrenciesController : ControllerBase
     {
-        private ITransactionRepository _transactionRepository;
+        private ITransactionService _transactionService;
 
-        public TransactionCurrenciesController(ITransactionRepository transactionRepository)
+        public TransactionCurrenciesController(ITransactionService transactionService)
         {
-            _transactionRepository = transactionRepository;
+            _transactionService = transactionService;
         }
 
         // GET: api/TransactionCurrencies
@@ -28,16 +27,22 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TransactionCurrency>> GetTransactionCurrency(Guid id)
         {
-            return null ;
+            return null;
         }
 
-        
-        [HttpPost]
-        public IActionResult PostTransactionCurrency(TransactionCurrency transactionCurrency)
-        {
-           _transactionRepository.SendMessage(transactionCurrency);
 
-            return Ok($"SENDET {transactionCurrency}");
+        [HttpPost]
+        public async Task<IActionResult> PostTransactionCurrencyAsync(TransactionCurrency transactionCurrency)
+        {
+            if (!ModelState.IsValid)
+            {
+                // log need
+                 throw new NullReferenceException(nameof(PostTransactionCurrencyAsync));
+
+            }
+            await _transactionService.BuyingCurrencyAsync(transactionCurrency).ConfigureAwait(false);
+
+            return Ok("Сurrency bying was successful");
         }
 
 

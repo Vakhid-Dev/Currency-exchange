@@ -83,5 +83,15 @@
 
             }
         }
+
+        Task IRabbitMQ.SendMessage(object message)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRabbitMQ.SendMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

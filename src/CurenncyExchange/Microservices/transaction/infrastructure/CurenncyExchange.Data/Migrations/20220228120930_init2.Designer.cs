@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CurenncyExchange.Data.Migrations
+namespace CurenncyExchange.Transaction.Data.Migrations
 {
     [DbContext(typeof(TransactionContext))]
-    [Migration("20220223132826_initialise")]
-    partial class initialise
+    [Migration("20220228120930_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,24 +24,39 @@ namespace CurenncyExchange.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CurenncyExchange.Core.AccountDetails", b =>
+            modelBuilder.Entity("CurenncyExchange.Core.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("Ammount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("AccountBalance")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CurrencyDetailsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("CurenncyExchange.Core.CurrencyDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CurrencyType")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
 
-                    b.Property<decimal?>("Rate")
+                    b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountDetails");
+                    b.ToTable("CurrencyDetails");
                 });
 
             modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
@@ -50,23 +65,37 @@ namespace CurenncyExchange.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AccountDetailsId")
+                    b.Property<Guid?>("AccountsId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CurrencyDetailsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreation")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountDetailsId");
+                    b.HasIndex("AccountsId");
+
+                    b.HasIndex("CurrencyDetailsId");
 
                     b.ToTable("TransactionDetails");
                 });
 
             modelBuilder.Entity("CurenncyExchange.Transaction.Core.TransactionCurrency", b =>
                 {
-                    b.HasOne("CurenncyExchange.Core.AccountDetails", "AccountDetails")
+                    b.HasOne("CurenncyExchange.Core.Account", "Accounts")
                         .WithMany()
-                        .HasForeignKey("AccountDetailsId");
+                        .HasForeignKey("AccountsId");
 
-                    b.Navigation("AccountDetails");
+                    b.HasOne("CurenncyExchange.Core.CurrencyDetails", "CurrencyDetails")
+                        .WithMany()
+                        .HasForeignKey("CurrencyDetailsId");
+
+                    b.Navigation("Accounts");
+
+                    b.Navigation("CurrencyDetails");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,4 @@
-﻿using CurenncyExchange.Core;
-using CurenncyExchange.Transaction.Core;
+﻿using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
 
 namespace CurenncyExchange.App.Service
@@ -12,10 +11,10 @@ namespace CurenncyExchange.App.Service
             _transactionRepository = transactionRepository;
         }
         //ToDo need to imlement 
-        public Task ExecuteAsync (TransactionCurrency transactionCurrency)
+        public async Task BuyingCurrencyAsync(TransactionCurrency transactionCurrency)
         {
-            _transactionRepository.SendMessage(transactionCurrency);
-            return Task.CompletedTask;  
+           await _transactionRepository.BuyingCurrencyAsync(transactionCurrency).ConfigureAwait(false);
+             
         }
     }
 }

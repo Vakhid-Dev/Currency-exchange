@@ -2,7 +2,9 @@
 {
     public interface IRabbitMQ
     {
-        public void SendMessage(object obj);
-        public void SendMessage(string message);
+        // public void SendMessage(object obj);
+        public Task SendMessage(object message);
+        public Task SendMessage(string message);
+        
     }
 }
