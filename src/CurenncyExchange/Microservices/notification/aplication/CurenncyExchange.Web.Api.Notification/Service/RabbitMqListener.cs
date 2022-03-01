@@ -9,6 +9,8 @@
     using System;
     using CurenncyExchange.Core.RabbitMQ;
     using System.Text.Json;
+    using CurenncyExchange.Notification.Core;
+    using CurenncyExchange.Transaction.Core;
 
     public class RabbitMqListener : BackgroundService, IRabbitMQ
     {
@@ -32,15 +34,14 @@
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (ch, ea) =>
+            consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                SendMessage(content);
-                // Каким-то образом обрабатываем полученное сообщение
 
+                // Каким-то образом обрабатываем полученное сообщение
                 Console.WriteLine($"Получено сообщение: {content}");
                 Console.WriteLine("_____________________________");
-
+                await SendMessage(content);
                 _channel.BasicAck(ea.DeliveryTag, false);
             };
 
@@ -56,13 +57,24 @@
             base.Dispose();
         }
 
-        public void SendMessage(object obj)
+
+        public async Task SendMessage(object obj)
         {
-            var message = JsonSerializer.Serialize(obj);
-            SendMessage(message);
+            TransactionCurrency? transactionCurrency = obj as TransactionCurrency;
+            var messageDto = new Message()
+            {
+                AccountId = transactionCurrency.Accounts.Id,
+                Ammount = transactionCurrency.CurrencyDetails.Ammount,
+                CurrencyType = transactionCurrency.CurrencyDetails.CurrencyType.ToString(),
+                Rate = transactionCurrency.CurrencyDetails.Rate,
+                IsSucces = true,
+                Id = new Guid()
+            };
+            var message = JsonSerializer.Serialize(messageDto);
+            await SendMessage(message);
         }
 
-        public void SendMessage(string message)
+        public async Task SendMessage(string message)
         {
             //  вынести значения "localhost" и "Queue"
             // в файл конфигурации
@@ -80,18 +92,9 @@
                                routingKey: "sms",
                                basicProperties: null,
                                body: body);
-
             }
+            await Task.Delay(1000);
         }
 
-        Task IRabbitMQ.SendMessage(object message)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRabbitMQ.SendMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

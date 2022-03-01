@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "microservices", "microservi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Transactions.Web.Api", "Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api.csproj", "{9C467005-99C2-487C-887E-671A3ABE4ACC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Core", "Microservices\notification\domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj", "{06DDC649-EAD7-42B6-BCED-CAA71B2C3B58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Core", "Microservices\notification\domain\CurenncyExchange.Core\CurenncyExchange.Notification.Core.csproj", "{06DDC649-EAD7-42B6-BCED-CAA71B2C3B58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Data", "Microservices\notification\infrastructure\CurenncyExchange.Notification.Data\CurenncyExchange.Notification.Data.csproj", "{97A240A9-D931-498E-95A3-A3272AFC3146}"
 EndProject

@@ -11,4 +11,8 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\domain\CurenncyExchange.Core\CurenncyExchange.Notification.Core.csproj" />
+  </ItemGroup>
+
 </Project>

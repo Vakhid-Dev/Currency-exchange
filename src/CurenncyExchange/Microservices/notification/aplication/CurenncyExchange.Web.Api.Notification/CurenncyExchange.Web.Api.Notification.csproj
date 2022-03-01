@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Domain\CurenncyExchange.Core\CurenncyExchange.Core.csproj" />
+    <ProjectReference Include="..\..\..\transaction\domain\CurenncyExchange.Core\CurenncyExchange.TransactionCore.csproj" />
     <ProjectReference Include="..\..\infrastructure\CurenncyExchange.Notification.Data\CurenncyExchange.Notification.Data.csproj" />
   </ItemGroup>
 

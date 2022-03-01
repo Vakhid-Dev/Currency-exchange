@@ -1,4 +1,4 @@
-﻿using CurenncyExchange.Core;
+﻿using CurenncyExchange.Notification.Core;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

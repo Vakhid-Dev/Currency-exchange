@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CurenncyExchange.Core
+namespace CurenncyExchange.Notification.Core
 {
     public interface INotificationService
     {
