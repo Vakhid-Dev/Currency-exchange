@@ -55,11 +55,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notificati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Data", "Microservices\notification\infrastructure\CurenncyExchange.Notification.Data\CurenncyExchange.Notification.Data.csproj", "{97A240A9-D931-498E-95A3-A3272AFC3146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Web.Api.Notification", "Microservices\notification\aplication\CurenncyExchange.Web.Api.Notification\CurenncyExchange.Web.Api.Notification.csproj", "{B55EF60D-2DA9-405B-A19E-0903791F522B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Web.Api.Notification", "Microservices\notification\aplication\CurenncyExchange.Web.Api.Notification\CurenncyExchange.Web.Api.Notification.csproj", "{B55EF60D-2DA9-405B-A19E-0903791F522B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notification.Email", "Microservices\notification\microservices\CurenncyExchange.Notification.Email\CurenncyExchange.Notification.Email.csproj", "{37F975CC-FD95-4D68-B871-FD105B4B94BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Email", "Microservices\notification\microservices\CurenncyExchange.Notification.Email\CurenncyExchange.Notification.Email.csproj", "{37F975CC-FD95-4D68-B871-FD105B4B94BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Notification.Sms", "Microservices\notification\microservices\CurenncyExchange.Notification.Sms\CurenncyExchange.Notification.Sms.csproj", "{F674B6C3-E2DC-4036-B983-BF16074D6E94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Sms", "Microservices\notification\microservices\CurenncyExchange.Notification.Sms\CurenncyExchange.Notification.Sms.csproj", "{F674B6C3-E2DC-4036-B983-BF16074D6E94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,20 +2,24 @@
 using CurenncyExchange.Notification.Core;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CurenncyExchange.Notification.Email.Service
 {
-    internal class EmailNotificationService : INotificationService, IRabbitMqReceiver
+    public class EmailNotificationService : INotificationService, IRabbitMqReceiver
     {
 
-        public void Notify(Guid subjectId, Message message)
+        public  void Notify(string content)
         {
-            throw new NotImplementedException();
+            var mailMessage = new MailMessage()
+            {
+                From ="ExcangeService@gmail.com",
+                To ="user@gmail.com",
+                Subject= "Transaction",
+                Body = content
+            };
+            Console.WriteLine($"Sented message to {mailMessage.To}");
+
         }
 
         public async Task Recieve()
@@ -32,6 +36,7 @@ namespace CurenncyExchange.Notification.Email.Service
                 {
                     var body = e.Body.ToArray();
                     var encodingMessage = Encoding.UTF8.GetString(body);
+                    Notify(encodingMessage);
                     Console.WriteLine(e.Exchange);
                     Console.WriteLine(e.RoutingKey);
                     Console.WriteLine("Reciving [message] {0} ", encodingMessage);

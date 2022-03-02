@@ -8,6 +8,6 @@ namespace CurenncyExchange.Notification.Core
 {
     public interface INotificationService
     {
-       public void Notify(Guid subjectId, Message message);
+        public void Notify(string content);
     }
 }

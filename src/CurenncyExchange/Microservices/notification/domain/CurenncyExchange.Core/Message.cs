@@ -12,11 +12,11 @@ namespace CurenncyExchange.Notification.Core
         {
             Id = new Guid();
         }
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         public bool IsSucces { get; set; }
-        public decimal? Ammount { get; set; }
+        public decimal? Ammount { get;  set; }
         public string? CurrencyType { get; set; }
         public decimal? Rate { get; set; }
-        public Guid AccountId { get; set; }
+        public Guid AccountId { get;  set; }
     }
 }
