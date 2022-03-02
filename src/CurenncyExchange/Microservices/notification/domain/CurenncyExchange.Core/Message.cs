@@ -8,6 +8,10 @@ namespace CurenncyExchange.Notification.Core
 {
     public class Message
     {
+        public Message()
+        {
+            Id = new Guid();
+        }
         public Guid Id { get; set; }
         public bool IsSucces { get; set; }
         public decimal? Ammount { get; set; }

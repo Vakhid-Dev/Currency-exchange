@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\domain\CurenncyExchange.Core\CurenncyExchange.Notification.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JsonData\" />
+  </ItemGroup>
+
 </Project>

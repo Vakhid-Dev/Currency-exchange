@@ -8,14 +8,16 @@
     using System.Text;
     using System;
     using CurenncyExchange.Core.RabbitMQ;
-    using System.Text.Json;
     using CurenncyExchange.Notification.Core;
     using CurenncyExchange.Transaction.Core;
+    using Newtonsoft.Json;
+    using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
     public class RabbitMqListener : BackgroundService, IRabbitMqSender, IRabbitMqReceiver
     {
         private IConnection _connection;
         private IModel _channel;
+        private static string MessageFilePath = @"D:\Projects\Currency-exchange\src\CurenncyExchange\Microservices\notification\infrastructure\CurenncyExchange.Notification.Data\JsonData\Messages.json";
 
         public RabbitMqListener()
         {
@@ -34,7 +36,7 @@
             try
             {
                 stoppingToken.ThrowIfCancellationRequested();
-                await Recive();
+                await Recieve();
             }
             catch (Exception)
             {
@@ -50,23 +52,6 @@
             base.Dispose();
         }
 
-        public async Task Recive()
-        {
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += async (ch, ea) =>
-            {
-                var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-
-                // Каким-то образом обрабатываем полученное сообщение
-                Console.WriteLine($"Получено сообщение: {content}");
-                Console.WriteLine("_____________________________");
-                await SendMessage(content);
-                _channel.BasicAck(ea.DeliveryTag, false);
-            };
-
-            _channel.BasicConsume("notification", false, consumer);
-            await Task.Delay(1000);
-        }
         public async Task SendMessage(object obj)
         {
             TransactionCurrency? transactionCurrency = obj as TransactionCurrency;
@@ -76,11 +61,33 @@
                 Ammount = transactionCurrency.CurrencyDetails.Ammount,
                 CurrencyType = transactionCurrency.CurrencyDetails.CurrencyType.ToString(),
                 Rate = transactionCurrency.CurrencyDetails.Rate,
-                IsSucces = true,
-                Id = new Guid()
+                IsSucces = true
             };
-            var message = JsonSerializer.Serialize(messageDto);
+            string? message = JsonConvert.SerializeObject(messageDto);
+
             await SendMessage(message);
+
+            await WriteToJsonFileAsync(messageDto);
+        }
+
+        public async Task WriteToJsonFileAsync(Message message)
+        {
+            await File.WriteAllTextAsync(MessageFilePath, JsonConvert.SerializeObject(message));
+
+
+        }
+
+        public async Task<Message> WriteToJsonFileAsync(string path)
+        {
+            path = MessageFilePath;
+            Message message;
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(path))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                message = await Task.Run<Message>(() => (Message)serializer.Deserialize(file, typeof(Message)));
+            }
+            return message;
         }
 
         public async Task SendMessage(string message)
@@ -105,8 +112,22 @@
             await Task.Delay(1000);
         }
 
+        public async Task Recieve()
+        {
+            var consumer = new EventingBasicConsumer(_channel);
+            consumer.Received += async (ch, ea) =>
+            {
+                var content = Encoding.UTF8.GetString(ea.Body.ToArray());
+                TransactionCurrency currency = JsonConvert.DeserializeObject<TransactionCurrency>(content);
+                // Каким-то образом обрабатываем полученное сообщение
+                Console.WriteLine($"Получено сообщение: {content}");
+                Console.WriteLine("_____________________________");
+                await SendMessage(currency);
+                _channel.BasicAck(ea.DeliveryTag, false);
+            };
 
-
-
+            _channel.BasicConsume("notification", false, consumer);
+            await Task.Delay(1000);
+        }
     }
 }
