@@ -12,6 +12,7 @@
     using CurenncyExchange.Transaction.Core;
     using Newtonsoft.Json;
     using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+    using CurenncyExchange.Core;
 
     public class RabbitMqListener : BackgroundService, IRabbitMqSender, IRabbitMqReceiver
     {
@@ -54,7 +55,14 @@
 
         public async Task SendMessage(object obj)
         {
+
             TransactionCurrency? transactionCurrency = obj as TransactionCurrency;
+            transactionCurrency.Accounts = new Account()
+            {
+                CurrencyDetailsId = transactionCurrency.CurrencyDetails.Id,
+                Id = new Guid()
+
+            };
             var messageDto = new Message()
             {
                 AccountId = transactionCurrency.Accounts.Id,

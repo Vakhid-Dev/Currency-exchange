@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHostedService<CurrencyService>();
-builder.Services.AddSingleton<ICurrencyService, CurrencyService>();
+builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddControllersWithViews();
 

@@ -12,6 +12,7 @@ namespace CurenncyExchange.MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMemoryCache _memoryCache;
+        private static List<CurrencyDetails> CurrencyDetailsList = new List<CurrencyDetails>();
 
 
         public HomeController(ILogger<HomeController> logger, IMemoryCache memoryCache)
@@ -36,6 +37,7 @@ namespace CurenncyExchange.MVC.Controllers
         {
             using (var client = new HttpClient())
             {
+                transactionCurrency.CurrencyDetails = CurrencyDetailsList.LastOrDefault();
                 HttpRequestMessage message = new HttpRequestMessage()
                 {
                     RequestUri = new Uri("https://localhost:7011/api/transactioncurrencies"),
@@ -59,18 +61,27 @@ namespace CurenncyExchange.MVC.Controllers
         public IActionResult Transaction([FromQuery(Name = "type")] int type, [FromQuery(Name = "value")] decimal value)
         {
 
-
             ViewBag.CurrencyType = new { name = "Dollar", value = value, type = 1 };
+            CurrencyDetails currencyDetails = new CurrencyDetails()
+            {
+                Rate = ViewBag.CurrencyType.value,
+                Ammount = 1000,
+                CurrencyType = CurrencyType.USD
+            };
             switch (type)
             {
 
                 case 2:
                     ViewBag.CurrencyType = new { name = "Euro", value = value, type = 2 };
+                    currencyDetails.CurrencyType = CurrencyType.EURO;
                     break;
                 default:
 
                     break;
             }
+
+            CurrencyDetailsList.Add(currencyDetails);
+
             return View();
         }
         public IActionResult Converter()

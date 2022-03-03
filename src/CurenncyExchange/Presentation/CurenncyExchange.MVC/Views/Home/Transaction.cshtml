@@ -1,10 +1,6 @@
 ﻿
 @{
 	ViewData["Title"] = "Transaction";
-	var rub = 1000;
-	var dollar =Math.Round(rub/ViewBag.CurrencyType.value,2);
-	var euro =Math.Round(rub/ViewBag.CurrencyType.value,2);
-	var type =ViewBag.CurrencyType.type;
 
 }
 
@@ -17,15 +13,8 @@
 <body>
 	
 	<form name="form"  method="post" id="form_message">
-		<p> <div class="titles">Cумма в рублях </div> <input class="input" name="sum" type="text" id = "sum" value =1000> </p>
+		<p> <div class="titles">Cумма</div> <input class="input" name="sum" type="text" id = "sum" value =1000> </p>
 		
-		@if (type == 1)
-		{
-			 <p> Вы получите  @dollar $</p>
-		}else
-		{
-			 <p> Вы получите  @euro € </p>
-		}
    
 		<p><input id="submit" value="Подтвердить" type="submit"  /></p>
 	</form>
