@@ -1,36 +1,28 @@
-﻿@*@model CurenncyExchange.Core.Currency
-
+﻿@model CurenncyExchange.MVC.Models.CurrencyViewModel
 
 @{
-    ViewData["Title"] = "";
-
-    
-
+    ViewData["Title"] = "Index";
 }
 
-<h1>Live Exchange Rates Today</h1>
+<div>
+  <h4>Live Exchange Rates Today</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.USD)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.USD)  @Html.ActionLink("Buy", "Transaction", new {  type = 1 ,value = @ViewBag.USD})
+        </dd>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EURO)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.EURO)  @Html.ActionLink("Buy", "Transaction", new {  type = 2 ,value = @ViewBag.EURO})
+        </dd>
+    </dl>
+</div>
+<div>
 
-                @Html.DisplayNameFor(model => model.USD) - @Html.DisplayFor(modelItem => modelItem.USD)
-                <p>
-                
-                     @Html.ActionLink("Buy", "Transaction", new {  type = 1 ,value = @ViewBag.USD})
-                </p>
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.EURO) - @Html.DisplayFor(modelItem => modelItem.EURO)
-                <p>
-                  @Html.ActionLink("Buy", "Transaction", new {  type = 2,value =@ViewBag.EURO})
-                </p>
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-</table>
-*@
+</div>
