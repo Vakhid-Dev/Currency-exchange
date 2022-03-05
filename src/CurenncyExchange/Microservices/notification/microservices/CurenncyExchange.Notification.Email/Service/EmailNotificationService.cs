@@ -18,7 +18,6 @@ namespace CurenncyExchange.Notification.Email.Service
                 Subject= "Transaction",
                 Body = content
             };
-            Console.WriteLine($"Sented message to {mailMessage.To}");
 
         }
 
@@ -37,9 +36,8 @@ namespace CurenncyExchange.Notification.Email.Service
                     var body = e.Body.ToArray();
                     var encodingMessage = Encoding.UTF8.GetString(body);
                     Notify(encodingMessage);
-                    Console.WriteLine(e.Exchange);
-                    Console.WriteLine(e.RoutingKey);
-                    Console.WriteLine("Reciving [message] {0} ", encodingMessage);
+                    // TODO обработать  в файлe json
+               
                 };
                 chanel.BasicConsume("email", true, consumer);
                 Console.ReadLine();

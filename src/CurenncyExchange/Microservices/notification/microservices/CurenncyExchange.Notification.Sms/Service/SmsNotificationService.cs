@@ -24,9 +24,7 @@ namespace CurenncyExchange.Notification.Email.Service
                     var body = e.Body.ToArray();
                     var encodingMessage = Encoding.UTF8.GetString(body);
                     Notify(encodingMessage);
-                    Console.WriteLine(e.Exchange);
-                    Console.WriteLine(e.RoutingKey);
-                    Console.WriteLine("Reciving [message] {0} ", encodingMessage);
+                    // TODO обработать  в файлe json
                 };
                 chanel.BasicConsume("sms", true, consumer);
                 Console.ReadLine();
@@ -41,7 +39,6 @@ namespace CurenncyExchange.Notification.Email.Service
                 PhoneNumber = RandomDigits(10),
                 Body = content
             };
-            Console.WriteLine($"Sented message to {phone.PhoneNumber}");
 
         }
         public string RandomDigits(int length)

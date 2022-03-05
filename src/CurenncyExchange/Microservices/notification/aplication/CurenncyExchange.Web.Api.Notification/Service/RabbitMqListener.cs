@@ -126,10 +126,9 @@
             consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                TransactionCurrency currency = JsonConvert.DeserializeObject<TransactionCurrency>(content);
-                // Каким-то образом обрабатываем полученное сообщение
-                Console.WriteLine($"Получено сообщение: {content}");
-                Console.WriteLine("_____________________________");
+                TransactionCurrency? currency = JsonConvert.DeserializeObject<TransactionCurrency>(content);
+                //TODO обрабатываем полученное сообщение в json file
+            
                 await SendMessage(currency);
                 _channel.BasicAck(ea.DeliveryTag, false);
             };
