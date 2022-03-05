@@ -32,7 +32,7 @@ namespace CurenncyExchange.MVC.Controllers
             return View(currency);
         }
         [HttpPost]
-        public async Task<IActionResult> Transaction(TransactionCurrency transactionCurrency)
+        public async Task<IActionResult> BuyCurrencyAsync(TransactionCurrency transactionCurrency)
         {
             using (var client = new HttpClient())
             {

@@ -5,5 +5,6 @@ namespace CurenncyExchange.App.Service
     public interface ITransactionService
     {
       public Task BuyingCurrencyAsync(TransactionCurrency transactionCurrency);
+      public Task BuyingCurrencyAsync(ByCurrencyRequest byCurrencyRequest);
     }
 }
