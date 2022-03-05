@@ -7,7 +7,7 @@ using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container.22тттт
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

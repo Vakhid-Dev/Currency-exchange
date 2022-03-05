@@ -4,7 +4,6 @@ using CurenncyExchange.Transaction.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
-using System.Text.Json;
 
 namespace CurenncyExchange.MVC.Controllers
 {
@@ -40,6 +39,7 @@ namespace CurenncyExchange.MVC.Controllers
                 transactionCurrency.CurrencyDetails = CurrencyDetailsList.LastOrDefault();
                 HttpRequestMessage message = new HttpRequestMessage()
                 {
+                    // Вынести url в конфиг файл или в константу
                     RequestUri = new Uri("https://localhost:7011/api/transactioncurrencies"),
                     Method = HttpMethod.Post,
                     Content = JsonContent.Create(transactionCurrency)
