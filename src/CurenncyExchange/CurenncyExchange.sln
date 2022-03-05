@@ -61,6 +61,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notificati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notification.Sms", "Microservices\notification\microservices\CurenncyExchange.Notification.Sms\CurenncyExchange.Notification.Sms.csproj", "{F674B6C3-E2DC-4036-B983-BF16074D6E94}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1B46926D-619D-438E-AC39-78D9C1B91C04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Infrastructure.Bus", "Infrastructure\CurenncyExchange.Infrastructure.Bus\CurenncyExchange.Infrastructure.Bus.csproj", "{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,10 @@ Global
 		{F674B6C3-E2DC-4036-B983-BF16074D6E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F674B6C3-E2DC-4036-B983-BF16074D6E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F674B6C3-E2DC-4036-B983-BF16074D6E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +150,7 @@ Global
 		{B55EF60D-2DA9-405B-A19E-0903791F522B} = {5F4A640D-7595-4EBF-88A6-5007E6D54D19}
 		{37F975CC-FD95-4D68-B871-FD105B4B94BD} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
 		{F674B6C3-E2DC-4036-B983-BF16074D6E94} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
+		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320} = {1B46926D-619D-438E-AC39-78D9C1B91C04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}
