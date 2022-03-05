@@ -3,7 +3,9 @@ using CurenncyExchange.App.Service;
 using CurenncyExchange.Data.Context;
 using CurenncyExchange.Transaction.Core.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using System.Configuration;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options => {
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Transaction Microservice",
+        Version = "v1",
+        Contact = new OpenApiContact
+        {
+            Name = "Vakhid Guliev",
+            Email = "01.unbroken@gmail.com"
+        },
+        Description = "A fully-featured transaction microservice."
+    });
+    var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        options.IncludeXmlComments(xmlPath);
+    }
+});
 builder.Services.AddDbContext<TransactionContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("TransactionDb"));
