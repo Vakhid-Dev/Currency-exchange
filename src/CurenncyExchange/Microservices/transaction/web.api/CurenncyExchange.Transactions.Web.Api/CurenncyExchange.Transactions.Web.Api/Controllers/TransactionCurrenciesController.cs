@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.App.Service;
+using CurenncyExchange.App;
 
 namespace CurenncyExchange.Transactions.Web.Api.Controllers
 {
@@ -31,18 +32,31 @@ namespace CurenncyExchange.Transactions.Web.Api.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> PostTransactionCurrencyAsync(TransactionCurrency transactionCurrency)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        // log need
+        //         throw new NullReferenceException(nameof(PostTransactionCurrencyAsync));
+
+        //    }
+        //   // await _transactionService.BuyingCurrencyAsync(transactionCurrency).ConfigureAwait(false);
+         
+        //    return Ok("Сurrency bying was successful");
+        //}
         [HttpPost]
-        public async Task<IActionResult> PostTransactionCurrencyAsync(TransactionCurrency transactionCurrency)
+        public  Task<IActionResult> PostTransactionCurrencyAsync(ByCurrencyRequest byCurrencyRequest)
         {
             if (!ModelState.IsValid)
             {
                 // log need
-                 throw new NullReferenceException(nameof(PostTransactionCurrencyAsync));
+                throw new NullReferenceException(nameof(PostTransactionCurrencyAsync));
 
             }
-            await _transactionService.BuyingCurrencyAsync(transactionCurrency).ConfigureAwait(false);
+             _transactionService.BuyingCurrencyAsync(byCurrencyRequest);
 
-            return Ok("Сurrency bying was successful");
+            return null;
         }
 
 

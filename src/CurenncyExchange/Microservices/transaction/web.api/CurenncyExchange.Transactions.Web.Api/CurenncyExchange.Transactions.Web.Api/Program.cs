@@ -4,8 +4,9 @@ using CurenncyExchange.Data.Context;
 using CurenncyExchange.Transaction.Core.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Configuration;
 using System.Reflection;
+using MediatR;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +40,7 @@ builder.Services.AddDbContext<TransactionContext>(options =>
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 
-
+builder.Services.AddMediatR(typeof(Program));
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
 ﻿using CurenncyExchange.Core.Bus;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
+using CurenncyExchange.TransactionCore.Commands;
 
 namespace CurenncyExchange.App.Service
 {
@@ -20,9 +21,17 @@ namespace CurenncyExchange.App.Service
              
         }
 
-        public Task BuyingCurrencyAsync(ByCurrencyRequest byCurrencyRequest)
+        public void BuyingCurrencyAsync(ByCurrencyRequest byCurrencyRequest)
         {
-            throw new NotImplementedException();
+            var byCurrencyCommand = new ByCurrencyCommand
+            {
+                Ammount = byCurrencyRequest.Ammount,
+                CurrencyType = (TransactionCore.Commands.CurrencyType)byCurrencyRequest.CurrencyType,
+                Rate = byCurrencyRequest.Rate,
+           
+             
+            };
+            _eventBus.SendComand(byCurrencyCommand);
         }
     }
 }

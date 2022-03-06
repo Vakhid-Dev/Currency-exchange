@@ -1,5 +1,7 @@
 ﻿using CurenncyExchange.Core.Bus;
+using CurenncyExchange.Core.Commands;
 using CurenncyExchange.Core.Events;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -10,6 +12,7 @@ namespace CurenncyExchange.Infrastructure.Bus
 {
     public class RabbitMQBus : IEventBus
     {
+        private readonly IMediator _mediator;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private static IConnection _rabbitMqConnection;
         private static IModel _rabbitMqChannel;
@@ -102,6 +105,11 @@ namespace CurenncyExchange.Infrastructure.Bus
                     await (Task)concreteType.GetMethod(nameof(IEventHandler<Event>.Handle)).Invoke(handlerInstance, new object[] { @event });
                 }
             }
+        }
+
+        public Task SendComand<TComand>(TComand comand) where TComand : Command
+        {
+          return _mediator.Send(comand);
         }
     }
 }
