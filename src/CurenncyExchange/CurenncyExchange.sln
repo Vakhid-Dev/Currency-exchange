@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C49F2B9B-3F68-4FBB-B289-7CA042525A4B}"
+	ProjectSection(SolutionItems) = preProject
+		Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api\Program.cs = Microservices\transaction\web.api\CurenncyExchange.Transactions.Web.Api\CurenncyExchange.Transactions.Web.Api\Program.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.MVC", "Presentation\CurenncyExchange.MVC\CurenncyExchange.MVC.csproj", "{11BF05A7-1BA8-4EB2-8002-FA50935719B5}"
 EndProject
@@ -63,7 +66,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Notificati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1B46926D-619D-438E-AC39-78D9C1B91C04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Infrastructure.Bus", "Infrastructure\CurenncyExchange.Infrastructure.Bus\CurenncyExchange.Infrastructure.Bus.csproj", "{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurenncyExchange.Infrastructure.Bus", "Infrastructure\CurenncyExchange.Infrastructure.Bus\CurenncyExchange.Infrastructure.Bus.csproj", "{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurenncyExchange.Infrastructure.IOC", "Infrastructure\CurenncyExchange.Infrastructure.IOC\CurenncyExchange.Infrastructure.IOC.csproj", "{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +124,10 @@ Global
 		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +160,7 @@ Global
 		{37F975CC-FD95-4D68-B871-FD105B4B94BD} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
 		{F674B6C3-E2DC-4036-B983-BF16074D6E94} = {CDEF3294-6523-4110-B713-1D0591ED4C37}
 		{F9BB615A-EAF7-4341-9FEA-27CF22CCE320} = {1B46926D-619D-438E-AC39-78D9C1B91C04}
+		{4DD485D0-C64D-478E-B1D5-5D1F995EF6BB} = {1B46926D-619D-438E-AC39-78D9C1B91C04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD7940-8696-4F18-9AC6-54F720E7CE8E}

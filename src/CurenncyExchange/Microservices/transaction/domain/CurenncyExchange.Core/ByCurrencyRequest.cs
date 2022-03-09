@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurenncyExchange.App
+namespace CurenncyExchange.Transaction.Core
 {
     public class ByCurrencyRequest
     {

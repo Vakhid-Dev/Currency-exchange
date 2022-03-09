@@ -13,6 +13,7 @@ namespace CurenncyExchange.Core
         [Column(TypeName = "nvarchar(30)")]
         public CurrencyType CurrencyType { get; set; }
 
+      
     }
     public enum CurrencyType
     {

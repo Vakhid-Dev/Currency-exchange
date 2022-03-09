@@ -10,106 +10,130 @@ using System.Text;
 
 namespace CurenncyExchange.Infrastructure.Bus
 {
-    public class RabbitMQBus : IEventBus
+    public sealed class RabbitMQBus : IEventBus
     {
         private readonly IMediator _mediator;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
-        private static IConnection _rabbitMqConnection;
-        private static IModel _rabbitMqChannel;
         private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
-        public void Publish<TEvent>(TEvent @event) where TEvent : Event
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
+        public RabbitMQBus(IMediator mediator, IServiceScopeFactory serviceScopeFactory)
         {
-            var factory = new ConnectionFactory()
+            _mediator = mediator;
+            _serviceScopeFactory = serviceScopeFactory;
+            _handlers = new Dictionary<string, List<Type>>();
+            _eventTypes = new List<Type>();
+        }
+
+        // Send command is related to the bus sending commands across
+        // and then publish and subcribe relate to the events.
+        public Task SendCommand<T>(T command) where T : Command
+        {
+            return _mediator.Send(command);
+        }
+
+        public void Publish<T>(T @event) where T : Event
+        {
+            //ToDo вынести значения "localhost" и "queue" в файл конфигурации
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
             {
-                HostName = "localhost"
-            };
-            _rabbitMqConnection = _rabbitMqConnection ?? factory.CreateConnection();
-            _rabbitMqChannel = _rabbitMqChannel ?? _rabbitMqConnection.CreateModel();
-            var eventName = typeof(TEvent).Name;
-            _rabbitMqChannel.QueueDeclare(queue: eventName, durable: false, exclusive: false, autoDelete: true, arguments: null);
-            var message = JsonConvert.SerializeObject(@event);
-            var messageBody = Encoding.UTF8.GetBytes(message);
-            _rabbitMqChannel.BasicPublish(exchange: string.Empty, routingKey: eventName, basicProperties: null, body: messageBody);
+                var eventName = @event.GetType().Name;
+                channel.ExchangeDeclare("transaction", ExchangeType.Fanout);
+                channel.QueueDeclare(eventName, false, false, false, null);
+
+                var message = JsonConvert.SerializeObject(@event);
+                var body = Encoding.UTF8.GetBytes(message);
+
+                channel.BasicPublish("transaction", eventName, null, body);
+            }
+
 
         }
-        public void Subscribe<TEvent, TEventHandler>()
-            where TEvent : Event
-            where TEventHandler : IEventHandler<TEvent>
+
+
+        public void Subscribe<T, TH>()
+            where T : Event
+            where TH : IEventHandler<T>
         {
-            var eventType = typeof(TEvent);
-            var eventName = eventType.Name;
-            var eventHandlerType = typeof(TEventHandler);
-            if (!_eventTypes.Contains(eventType))
+            var eventName = typeof(T).Name;
+            var handlerType = typeof(TH);
+
+            if (!_eventTypes.Contains(typeof(T)))
             {
-                _eventTypes.Add(eventType);
+                _eventTypes.Add(typeof(T));
             }
+
             if (!_handlers.ContainsKey(eventName))
             {
                 _handlers.Add(eventName, new List<Type>());
             }
-            if (_handlers[eventName].Any(x => x.GetType() == eventHandlerType))
+
+            if (_handlers[eventName].Any(s => s.GetType() == handlerType))
             {
-                throw new ArgumentException($"Event handler type '{eventHandlerType}' is already registered for event '{eventName}'", nameof(eventHandlerType));
+                throw new ArgumentException(
+                    $"Handler Type {handlerType.Name} already is regisered for '{eventName}'", nameof(handlerType));
             }
-            _handlers[eventName].Add(eventHandlerType);
+
+            _handlers[eventName].Add(handlerType);
+
+            StartBasicConsume<T>();
         }
-        private void StartBasicConsume<TEvent>() where TEvent : Event
+
+        private void StartBasicConsume<T>() where T : Event
         {
-            var factory = new ConnectionFactory
+            var factory = new ConnectionFactory()
             {
                 HostName = "localhost",
-                Port = 5672,
                 DispatchConsumersAsync = true
             };
-            _rabbitMqConnection = _rabbitMqConnection ?? factory.CreateConnection();
-            _rabbitMqChannel = _rabbitMqChannel ?? _rabbitMqConnection.CreateModel();
-            var eventName = typeof(TEvent).Name;
-            _rabbitMqChannel.QueueDeclare(queue: eventName, durable: false, exclusive: false, autoDelete: true, arguments: null);
-            var consumer = new AsyncEventingBasicConsumer(_rabbitMqChannel);
-            consumer.Received += ConsumerReceived;
-            _rabbitMqChannel.BasicConsume(queue: eventName, autoAck: true, consumer);
+
+            var connection = factory.CreateConnection();
+            var channel = connection.CreateModel();
+
+            var eventName = typeof(T).Name;
+
+            channel.QueueDeclare(eventName, false, false, false, null);
+
+            var consumer = new AsyncEventingBasicConsumer(channel);
+            consumer.Received += Consumer_Received;
+
+            channel.BasicConsume(eventName, true, consumer);
         }
-        private async Task ConsumerReceived(object sender, BasicDeliverEventArgs eventArgs)
+
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            var eventName = eventArgs.RoutingKey;
-            var message = Encoding.UTF8.GetString(eventArgs.Body.ToArray());
+            var eventName = e.RoutingKey;
+            var message = Encoding.UTF8.GetString(e.Body.ToArray());
+
             try
             {
                 await ProcessEvent(eventName, message).ConfigureAwait(false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
-            }
-        }
-        private async Task ProcessEvent(string eventName, string message)
-        {
-            if (!_handlers.ContainsKey(eventName))
-            {
-                return;
-            }
-            using (var scope = _serviceScopeFactory.CreateScope())
-            {
-                var subscriptions = _handlers[eventName];
-                foreach (var subscription in subscriptions)
-                {
-                    var handlerInstance = scope.ServiceProvider.GetService(subscription);
-                    if (handlerInstance == null)
-                    {
-                        continue;
-                    }
-                    var eventType = _eventTypes.SingleOrDefault(x => x.Name == eventName);
-                    var @event = JsonConvert.DeserializeObject(message, eventType);
-                    var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                    await (Task)concreteType.GetMethod(nameof(IEventHandler<Event>.Handle)).Invoke(handlerInstance, new object[] { @event });
-                }
             }
         }
 
-        public Task SendComand<TComand>(TComand comand) where TComand : Command
+        private async Task ProcessEvent(string eventName, string message)
         {
-          return _mediator.Send(comand);
+            if (_handlers.ContainsKey(eventName))
+            {
+                using (var scope = _serviceScopeFactory.CreateScope())
+                {
+                    var subscriptions = _handlers[eventName];
+                    foreach (var subscription in subscriptions)
+                    {
+                        var handler = scope.ServiceProvider.GetService(subscription);
+                        if (handler == null) continue;
+                        var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
+                        var @event = JsonConvert.DeserializeObject(message, eventType);
+                        var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                    }
+                }
+            }
         }
     }
 }

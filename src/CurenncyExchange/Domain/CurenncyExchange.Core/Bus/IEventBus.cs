@@ -5,8 +5,12 @@ namespace CurenncyExchange.Core.Bus
 {
     public interface IEventBus
     {
-        void Publish<TEvent>(TEvent @event) where TEvent : Event;
-        void Subscribe<TEvent, IEventHandler>() where TEvent : Event where IEventHandler : IEventHandler<TEvent>;
-        Task SendComand<TComand>(TComand @comand) where TComand : Command;
+        Task SendCommand<T>(T command) where T : Command;
+
+        void Publish<T>(T @event) where T : Event;
+
+        void Subscribe<T, TH>()
+            where T : Event
+            where TH : IEventHandler<T>;
     }
 }

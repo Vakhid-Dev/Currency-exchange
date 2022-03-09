@@ -1,6 +1,8 @@
-﻿using CurenncyExchange.Data.Context;
+﻿using CurenncyExchange.Core;
+using CurenncyExchange.Data.Context;
 using CurenncyExchange.Transaction.Core;
 using CurenncyExchange.Transaction.Core.Repository;
+using CurenncyExchange.TransactionCore.Commands;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
@@ -15,9 +17,11 @@ namespace CurenncyExchange.App.Repository
             _transactionContext = transactionContext;
         }
 
-        public async Task BuyingCurrencyAsync(TransactionCurrency currency)
+   
+
+        public async Task BuyingCurrencyAsync(ByCurrencyCommand byCurrencyCommand)
         {
-            if (currency == null)
+            if (byCurrencyCommand == null)
             {
                 throw new ArgumentNullException($"{nameof(BuyingCurrencyAsync)} entity must not be null");
             }
@@ -26,9 +30,12 @@ namespace CurenncyExchange.App.Repository
 
                 try
                 {
+                    TransactionCurrency transactionCurrency = new TransactionCurrency()
+                    {
+                        CurrencyDetails = ToCurrencyDetails(byCurrencyCommand)
+                    };
 
-                    await _transactionContext.TransactionDetails.AddAsync(currency);
-                    await SendMessage(currency);
+                    await _transactionContext.TransactionDetails.AddAsync(transactionCurrency);
                     await _transactionContext.SaveChangesAsync();
                     await transaction.CommitAsync();
 
@@ -42,31 +49,17 @@ namespace CurenncyExchange.App.Repository
 
             }
         }
-
-
-        public async Task SendMessage(object obj)
+        
+        public static CurrencyDetails ToCurrencyDetails(ByCurrencyCommand byCurrencyCommand)
         {
-            var message = JsonSerializer.Serialize(obj);
-            await SendMessage(message);
-        }
-
-        public Task SendMessage(string message)
-        {
-            //ToDo вынести значения "localhost" и "queue" в файл конфигурации
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
+            return new CurrencyDetails
             {
-                channel.ExchangeDeclare("transaction", ExchangeType.Fanout);
-                var body = Encoding.UTF8.GetBytes(message);
-                channel.BasicPublish(exchange: "transaction",
-                                 routingKey: "",
-                                 basicProperties: null,
-                                 body: body);
-
-            }
-            return Task.CompletedTask;
+                Ammount = byCurrencyCommand.Ammount,
+                CurrencyType = (Core.CurrencyType)byCurrencyCommand.CurrencyType,
+                Rate = byCurrencyCommand.Rate
+            };
         }
+
 
     }
 

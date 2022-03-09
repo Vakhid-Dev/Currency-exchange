@@ -1,3 +1,4 @@
+using CurenncyExchange.Core.Bus;
 using CurenncyExchange.Web.Api.Notification.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,3 +26,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

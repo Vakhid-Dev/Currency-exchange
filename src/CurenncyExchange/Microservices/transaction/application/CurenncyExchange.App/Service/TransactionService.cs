@@ -9,29 +9,24 @@ namespace CurenncyExchange.App.Service
     {
         private ITransactionRepository _transactionRepository;
         private readonly IEventBus _eventBus;
-        public TransactionService(ITransactionRepository transactionRepository, IEventBus eventBus)
+        public TransactionService(IEventBus eventBus, ITransactionRepository transactionRepository)
         {
-            _transactionRepository = transactionRepository;
             _eventBus = eventBus;
-        }
-        //ToDo need to imlement 
-        public async Task BuyingCurrencyAsync(TransactionCurrency transactionCurrency)
-        {
-           await _transactionRepository.BuyingCurrencyAsync(transactionCurrency).ConfigureAwait(false);
-             
+            _transactionRepository = transactionRepository;
         }
 
-        public void BuyingCurrencyAsync(ByCurrencyRequest byCurrencyRequest)
+        public async Task BuyingCurrencyAsync(ByCurrencyRequest byCurrencyRequest)
         {
-            var byCurrencyCommand = new ByCurrencyCommand
+            ByCurrencyCommand? byCurrencyCommand = new ByCurrencyCommand
             {
                 Ammount = byCurrencyRequest.Ammount,
                 CurrencyType = (TransactionCore.Commands.CurrencyType)byCurrencyRequest.CurrencyType,
-                Rate = byCurrencyRequest.Rate,
-           
+                Rate = byCurrencyRequest.Rate,          
              
             };
-            _eventBus.SendComand(byCurrencyCommand);
+            await _eventBus.SendCommand(byCurrencyCommand);
+            await _transactionRepository.BuyingCurrencyAsync(byCurrencyCommand).ConfigureAwait(false);
+           
         }
     }
 }
